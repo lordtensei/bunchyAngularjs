@@ -1,0 +1,14 @@
+<button ng-click="addBunch()" class="btn btn-block btn-success">Create a ride</button>
+<span style="position: absolute;display: block;top: 50%;left: 50%;" us-spinner="{radius:20, width:8, length: 16, color:'#8dc63f'}" spinner-key="loginSpin" spinner-start-active="false"></span>
+<hr>
+<div>
+    <h3>Rides <button ng-click="refresh()" class="pull-right btn btn-success">Refresh</button></h3>
+</div>
+<br>
+<leaflet class="form-control" markers="markers" layers="layers" id="mymap" defaults="defaults" center="center" height="300px"></leaflet>
+<p></p>
+<tabset>
+    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" ng-click="tabclick()" disabled="tab.disabled">
+        <div ng-include="'views/tabcontent.html'"></div>
+    </tab>
+</tabset>

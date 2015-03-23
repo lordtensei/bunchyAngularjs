@@ -1,0 +1,104 @@
+<div>
+    <span style="position: absolute;display: block;top: 50%;left: 50%;" us-spinner="{radius:20, width:8, length: 16, color:'#8dc63f'}" spinner-key="createSpin" spinner-start-active="false"></span>
+</div>
+<form ng-submit="submit()" name="createbunch" class="form" novalidate>
+    <h3 class="form-signin-heading">Create a ride.</h3>
+    <hr>
+    <input name="name" ng-model="name" type="text" class="form-control" placeholder="Name of ride" required />
+    <p></p>
+    <textarea name="desc" ng-model="desc" type="desc" class="form-control" placeholder="Description" />
+    <div>
+    </div>
+    <h4>Meeting location</h4>
+    <leaflet class="form-control" markers="markers" id="meetinglocation" defaults="defaults" center="center" height="380px" ng-click="logLeafletData('meetinglocation')"></leaflet>
+    <div class="btn-group">
+        <h4>Is this a one off ride? {{oneoffradio || 'null'}}</h4>
+        <label class="btn btn-success" ng-model="oneoffradio" btn-radio="'Yes'">Yes</label>
+        <label class="btn btn-success" ng-model="oneoffradio" btn-radio="'No'">No</label>
+    </div>
+    <div ng-hide="oneoffradio == 'Yes'">
+        <h4>Days of week</h4>
+        <ui-select multiple ng-model="multipleSelect.days" theme="bootstrap" ng-disabled="disabled" style="width: 300px;">
+            <ui-select-match placeholder="Select days...">{{$item}}</ui-select-match>
+            <ui-select-choices repeat="day in availableDays | filter:$select.search">
+                {{day}}
+            </ui-select-choices>
+        </ui-select>
+        <p></p>
+    </div>
+    <p></p>
+    <div>
+        <h4>Time of ride</h4>
+        <timepicker ng-model="time" hour-step="1" minute-step="15"></timepicker>
+    </div>
+    <div ng-hide="oneoffradio == 'No'">
+        <h4>Date of ride</h4>
+        <div style="display:inline-block; min-height:290px;">
+            <datepicker ng-model="oneoffdate" init-date="minDate" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+        </div>
+        <pre>Date of ride is: <em>{{oneoffdate | date:'fullDate' }}</em></pre>
+    </div>
+    </p>
+    </div>
+    <p></p>
+
+    <div ng-show="isstravaauth && !showmap">Loading strava routes......
+    </div>
+
+    <div ng-show="isstravaauth && showmap">
+
+        <h4>Strava Route</h4>
+        <!--<div>{{stravaride.selected.map.summary_polyline}}</div>-->
+        <ui-select theme="bootstrap" ng-model="stravaride.selected" on-select="getStravaRoute()">
+            <ui-select-match placeholder="Select strava activity...">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="stravaride in stravarides | filter:{ name: $select.search }">
+                <div ng-bind-html="stravaride.name"></div>
+            </ui-select-choices>
+        </ui-select>
+
+        <div>
+            <leaflet id="stravamap" center="cen" paths="paths" layers="layers" height="380px"></leaflet>
+        </div>
+        <p></p>
+        <button type="button" ng-disabled="stravaride.selected == undefined" class="btn btn-success" ng-click="addRoute();">Add route</button>
+
+        <div ng-repeat="route in routes">
+            <p></p>
+            {{ route.name }} <a ng-click="deleteRoute($index)">Remove route</a>
+        </div>
+
+    </div>
+
+    <div ng-show="!isstravaauth">
+        <button type="button" class="btn btn-success" ng-click="stravaAuth();">Login with strava to add routes</button>
+    </div>
+
+    <div>
+        <div class="btn-group">
+            <h4>Is this a private ride? {{privateradio || 'null'}}</h4>
+            <label class="btn btn-success" ng-model="privateradio" btn-radio="'Yes'">Yes</label>
+            <label class="btn btn-success" ng-model="privateradio" btn-radio="'No'">No</label>
+        </div>
+    </div>
+
+    <div>
+        <div class="btn-group">
+            <h4>Is this ride sponsored? {{sponsoredradio || 'null'}}</h4>
+            <label class="btn btn-success" ng-model="sponsoredradio" btn-radio="'Yes'">Yes</label>
+            <label class="btn btn-success" ng-model="sponsoredradio" btn-radio="'No'">No</label>
+        </div>
+    </div>
+    <p></p>
+    <div ng-hide="sponsoredradio == 'No'">
+        <input name="sponsorname" ng-model="sponsorname" type="text" class="form-control" placeholder="Sponsored by" />
+        <div>
+            <leaflet id="sponsormap" markers="sponsormarkers" center="cen" paths="paths" layers="layers" height="380px" ng-click="logLeafletData('sponsormap')"></leaflet>
+        </div>
+    </div>
+
+    <p></p>
+    <button ng-click="" ng-disabled="createbunch.$invalid" class="btn btn-lg btn-success btn-block" type="submit">
+        Create
+    </button>
+    <br />
+</form>

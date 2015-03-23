@@ -1,0 +1,12 @@
+<p>Strava Route</p>
+<!--<div>{{stravaride.selected.map.summary_polyline}}</div>-->
+<ui-select theme="bootstrap" ng-model="stravaride.selected" on-select="someFunction($item, $model)" required>
+    <ui-select-match placeholder="Select strava activity...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="stravaride in stravarides | filter:{ name: $select.search }">
+        <div ng-bind-html="stravaride.name"></div>
+    </ui-select-choices>
+</ui-select>
+
+<div>
+    <leaflet id="stravamap" center="cen" paths="paths" layers="layers" height="480px"></leaflet>
+</div>
