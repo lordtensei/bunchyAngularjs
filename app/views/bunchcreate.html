@@ -89,14 +89,6 @@
         </div>
     </div>
     <p></p>
-    <div ng-hide="sponsoredradio == 'No'">
-        <input name="sponsorname" ng-model="sponsorname" type="text" class="form-control" placeholder="Sponsored by" />
-        <div>
-            <leaflet id="sponsormap" markers="sponsormarkers" center="cen" paths="paths" layers="layers" height="380px" ng-click="logLeafletData('sponsormap')"></leaflet>
-        </div>
-    </div>
-
-    <p></p>
     <button ng-click="" ng-disabled="createbunch.$invalid" class="btn btn-lg btn-success btn-block" type="submit">
         Create
     </button>
