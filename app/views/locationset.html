@@ -1,4 +1,3 @@
-<div>Please set location</div>
 <ui-select theme="bootstrap" ng-model="local.selected" required>
     <ui-select-match placeholder="Select location...">{{$select.selected.name}}</ui-select-match>
     <ui-select-choices repeat="local in locations | filter:{ name: $select.search }">

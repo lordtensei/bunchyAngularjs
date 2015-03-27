@@ -199,3 +199,8 @@ body {
     height: 50px;
     width: 50px;
 }
+/* override select drop down background  */
+
+.text-muted {
+    color: #8dc63f;
+}

@@ -1,4 +1,18 @@
+<span style="position: absolute;display: block;top: 50%;left: 50%;" us-spinner="{radius:20, width:8, length: 16, color:'#8dc63f'}" spinner-key="loginSpin" spinner-start-active="false"></span>
 <hr>
 <button ng-click="addBunch()" class="btn btn-block btn-success">Create a team</button>
 <p></p>
 <h3>My teams</h3>
+<hr>
+<div ng-repeat="bunch in bunches">
+    <h3>{{bunch.name}}</h3>
+    <p>{{bunch.desc}}</p>
+    <p>Ability: {{bunch.ability}}</p>
+    <p>Policy: {{bunch.policy}}</p>
+    <div>
+        <button ng-click="addRide(bunch)" class="pull-left btn btn-success">Add a ride</button>
+    </div>
+    <br>
+    <br>
+    <hr>
+</div>

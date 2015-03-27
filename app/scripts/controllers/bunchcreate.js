@@ -1,19 +1,42 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('BunchcreateCtrl', function ($scope, $http, API_URL, leafletData, alert, $state, $auth, usSpinnerService, stravaServices, locationServices, bunchServices) {
+    .controller('BunchcreateCtrl', function ($scope, $http, API_URL, leafletData, alert, $state, $auth, usSpinnerService, locationServices, bunchServices) {
 
         function init() {
 
+            $scope.profiles = [{
+                name: 'Personal'
+            }, {
+                name: 'Business'
+            }];
+
+            $scope.abilities = [{
+                name: 'All'
+            }, {
+                name: 'Beginner'
+            }, {
+                name: 'Intermediate'
+            }, {
+                name: 'Advanced'
+            }];
+
+            $scope.policies = [{
+                name: 'None'
+            }, {
+                name: 'Drop'
+            }, {
+                name: 'No drop'
+            }];
+
+            $scope.profile = {};
+            $scope.ability = {};
+            $scope.policy = {};
+
             locationServices.getUserLocation().success(function (startlocation) {
                 $scope.startlocation = startlocation;
-                $scope.cen = {
-                        lat: $scope.startlocation.lat,
-                        lng: $scope.startlocation.lng,
-                        zoom: 13
-                    },
 
-                    $scope.center = {
+                $scope.center = {
                         lat: $scope.startlocation.lat,
                         lng: $scope.startlocation.lng,
                         zoom: 13
@@ -24,7 +47,7 @@ angular.module('jwtApp')
                             lat: $scope.startlocation.lat,
                             lng: $scope.startlocation.lng,
                             focus: true,
-                            message: "Where does the ride meet?",
+                            message: "Where does the team meet?",
                             draggable: true
                         }
                     }
@@ -33,88 +56,14 @@ angular.module('jwtApp')
                 alert('success', 'Please select a location');
                 $state.go('locationset');
             });
-
-            $scope.getStravaActivities();
         }
 
-        $scope.routes = [];
-        $scope.showmap = {};
-        $scope.isstravaauth = {};
         $scope.minDate = new Date();
         $scope.time = new Date(0, 0, 0, 5, 30, 0, 0);
         $scope.oneofftime = new Date(0, 0, 0, 5, 30, 0, 0);
         $scope.center = {};
-        $scope.paths = {};
-        $scope.cen = {};
-        $scope.oneoffdate = new Date();
-        $scope.availableDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        $scope.hour = {};
-        $scope.stravaride = {};
-        $scope.hours = ['1', '2', '3', '4', '5', '6', '7'];
-        $scope.multipleSelect = {};
-        $scope.multipleSelect.days = ['Tuesday', 'Thursday'];
-        $scope.oneoff = false;
-        $scope.oneoffradio = 'No';
         $scope.privateradio = 'No';
         $scope.private = false;
-        $scope.sponsoredradio = 'No';
-
-        $scope.addRoute = function () {
-            $scope.routes.push({
-                name: $scope.stravaride.selected.name,
-                activityid: $scope.stravaride.selected.id,
-                path: $scope.paths.p1.latlngs
-            });
-        };
-
-        $scope.deleteRoute = function (idx) {
-            $scope.routes.splice(idx, 1);
-        };
-
-        $scope.getStravaActivities = function () {
-            $scope.showmap = false;
-            stravaServices.getStravaActivities().success(function (stravarides) {
-                $scope.stravarides = stravarides;
-                $scope.isstravaauth = true;
-                $scope.showmap = true;
-            }).error(function (err) {
-                $scope.isstravaauth = false;
-                $scope.showmap = false;
-            });
-        };
-
-        $scope.stravaAuth = function () {
-            usSpinnerService.spin('createSpin');
-            $auth.link('strava', $auth.getPayload()).then(function (res) {
-                $scope.getStravaActivities();
-                usSpinnerService.stop('createSpin');
-            }).catch(function (err) {
-                alert('warning', "Unable to connect to Strava! ", '', 4000);
-                usSpinnerService.stop('createSpin');
-            });
-        };
-
-        $scope.getStravaRoute = function () {
-            usSpinnerService.spin('createSpin');
-            stravaServices.getStravaActivity($scope.stravaride.selected.id).success(function (stravaride) {
-                $scope.cen = {
-                        lat: stravaride.startlat,
-                        lng: stravaride.startlng,
-                        zoom: 11
-                    },
-                    $scope.paths = {
-                        p1: {
-                            color: '#008000',
-                            weight: 4,
-                            latlngs: stravaride.routearray,
-                            layer: 'lines'
-                        }
-                    }
-                usSpinnerService.stop('createSpin');
-            }).error(function (err) {
-                alert('warning', "Strava activities! ", err.message);
-            })
-        };
 
         $scope.layers = {
             baselayers: {
@@ -177,20 +126,24 @@ angular.module('jwtApp')
             bunchServices.createBunch({
                 name: $scope.name,
                 desc: $scope.desc,
-                oneoff: $scope.oneoff,
+                ability: $scope.ability.selected.name,
+                policy: $scope.policy.selected.name,
+                profile: $scope.profile.selected.name,
+                //oneoff: $scope.oneoff,
                 startlocation: startlocation,
-                daysofweek: $scope.multipleSelect.days,
-                time: $scope.time,
-                routes: $scope.routes,
-                oneoffdate: $scope.oneoffdate,
-                private: $scope.private,
-                sponsored: $scope.sponsored,
-                sponsorname: $scope.sponsorname
+                website: $scope.website,
+                //daysofweek: $scope.multipleSelect.days,
+                //time: $scope.time,
+                //routes: $scope.routes,
+                //oneoffdate: $scope.oneoffdate,
+                private: $scope.private
+                    //sponsored: $scope.sponsored,
+                    //sponsorname: $scope.sponsorname
             }).success(function () {
-                alert('success', "Ride created", '');
-                $state.go('bunches');
+                alert('success', "Team created", '');
+                $state.go('myteams');
             }).error(function (err) {
-                alert('warning', "Unable to create ride?", '');
+                alert('warning', "Unable to create team?", '');
             });
         }
         init();

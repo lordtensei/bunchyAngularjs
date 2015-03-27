@@ -17,7 +17,8 @@ angular.module('jwtApp')
                 $state.go('bunches');
 
             }).error(function (err) {
-
+                alert('warning', "unable to set location! ", err.message);
+                $state.go('login');
             });
         };
     });
