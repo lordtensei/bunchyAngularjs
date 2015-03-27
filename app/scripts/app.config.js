@@ -45,6 +45,12 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
         controller: 'MyteamsCtrl'
     })
 
+    .state('addride', {
+        url: '/addride:bunchID',
+        templateUrl: 'views/addride.html',
+        controller: 'AddrideCtrl',
+    })
+
     .state('logout', {
         url: '/logout',
         controller: 'LogoutCtrl'
@@ -84,6 +90,6 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 })
 
-//.constant('API_URL', 'http://localhost:1337/')
+.constant('API_URL', 'http://localhost:1337/')
 
-.constant('API_URL', 'http://bunchyapi.herokuapp.com/')
+//.constant('API_URL', 'http://bunchyapi.herokuapp.com/')

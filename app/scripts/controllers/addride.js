@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('AddrideCtrl', function ($scope, $stateParams, $state, usSpinnerService, $auth, alert, stravaServices, locationServices, bunchServices) {
+    .controller('AddrideCtrl', function ($scope, $stateParams, $state, usSpinnerService, $auth, alert, stravaServices, locationServices, bunchServices, rideServices) {
 
         function init() {
 
@@ -22,6 +22,9 @@ angular.module('jwtApp')
             $scope.multipleSelect.days = ['Tuesday', 'Thursday'];
             $scope.oneoff = false;
             $scope.oneoffradio = 'No';
+            $scope.minDate = new Date();
+            $scope.time = new Date(0, 0, 0, 5, 30, 0, 0);
+            $scope.oneofftime = new Date(0, 0, 0, 5, 30, 0, 0);
 
             $scope.layers = {
                 baselayers: {
@@ -125,6 +128,32 @@ angular.module('jwtApp')
                 alert('warning', "Strava activities! ", err.message);
             })
         };
+
+        $scope.submit = function () {
+
+            if ($scope.oneoffradio == 'Yes') {
+                $scope.oneoff = true;
+            } else {
+                $scope.oneoff = false;
+            };
+
+            var daysofweeks = [{}];
+
+            rideServices.addRideDetails({
+                bunchid: $scope.bunch.id,
+                name: $scope.name,
+                oneoff: $scope.oneoff,
+                daysofweek: $scope.multipleSelect.days,
+                time: $scope.time,
+                routes: $scope.routes,
+                oneoffdate: $scope.oneoffdate
+            }).success(function () {
+                alert('success', "Team created", '');
+                $state.go('myteams');
+            }).error(function (err) {
+                alert('warning', "Unable to create team?", '');
+            });
+        }
 
         init();
 

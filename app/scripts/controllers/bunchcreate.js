@@ -58,9 +58,6 @@ angular.module('jwtApp')
             });
         }
 
-        $scope.minDate = new Date();
-        $scope.time = new Date(0, 0, 0, 5, 30, 0, 0);
-        $scope.oneofftime = new Date(0, 0, 0, 5, 30, 0, 0);
         $scope.center = {};
         $scope.privateradio = 'No';
         $scope.private = false;
@@ -103,25 +100,11 @@ angular.module('jwtApp')
                 lng: $scope.markers.mainMarker.lng
             }]
 
-            if ($scope.oneoffradio == 'Yes') {
-                $scope.oneoff = true;
-            } else {
-                $scope.oneoff = false;
-            }
-
             if ($scope.privateradio == 'Yes') {
                 $scope.private = true;
             } else {
                 $scope.private = false;
             }
-
-            if ($scope.sponsoredradio == 'Yes') {
-                $scope.sponsored = true;
-            } else {
-                $scope.sponsored = false;
-            }
-
-            var daysofweeks = [{}];
 
             bunchServices.createBunch({
                 name: $scope.name,
@@ -129,16 +112,9 @@ angular.module('jwtApp')
                 ability: $scope.ability.selected.name,
                 policy: $scope.policy.selected.name,
                 profile: $scope.profile.selected.name,
-                //oneoff: $scope.oneoff,
                 startlocation: startlocation,
                 website: $scope.website,
-                //daysofweek: $scope.multipleSelect.days,
-                //time: $scope.time,
-                //routes: $scope.routes,
-                //oneoffdate: $scope.oneoffdate,
                 private: $scope.private
-                    //sponsored: $scope.sponsored,
-                    //sponsorname: $scope.sponsorname
             }).success(function () {
                 alert('success', "Team created", '');
                 $state.go('myteams');
