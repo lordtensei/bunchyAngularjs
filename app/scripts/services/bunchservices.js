@@ -3,7 +3,7 @@
 angular.module('jwtApp')
     .factory('bunchServices', function (API_URL, $http) {
         return {
-            getBunchesByUserandDay: function (id) {
+            getRidesByUserandDay: function (id) {
                 return $http.get(API_URL + 'bunch/byuserandday?id=' + id)
             },
             getBunchesByUsers: function () {

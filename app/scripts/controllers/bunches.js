@@ -34,11 +34,12 @@ angular.module('jwtApp')
             });
         }
 
-        function getBunches(dayofweek) {
+        function getRides(dayofyear) {
             usSpinnerService.spin('loginSpin');
-            bunchServices.getBunchesByUserandDay(dayofweek).success(function (bunches) {
-                $scope.bunches = bunches;
-                drawMarkers(bunches);
+            bunchServices.getRidesByUserandDay(dayofyear).success(function (rides) {
+                console.log(rides);
+                $scope.bunches = rides;
+                drawMarkers(rides);
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
@@ -62,7 +63,7 @@ angular.module('jwtApp')
             $scope.markers = [];
             var adddays = dateServices.DaysToAdd(dateServices.GetDayNumber(moment().format('dddd')), dateServices.GetDayNumber(activetab.title));
             var datefortab = moment().add(adddays, 'd');
-            getBunches(activetab.title);
+            getRides(datefortab.dayOfYear());
             getBunchesOneOff(datefortab.dayOfYear());
             $scope.dayofweekdisplay = datefortab.toDate();
         }
