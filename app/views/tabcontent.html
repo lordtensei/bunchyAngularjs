@@ -5,42 +5,42 @@
     <hr>
 </div>
 <div ng-repeat="bunch in bunches">
-    <div ng-repeat="ride in bunch.rides">
-        <div class="col-md-6">
-            <h4>{{bunch.name}} @ {{ride.date | date : 'mediumTime'}}</h4>
-
-            <div class="col-md-4">
-                <button ng-click="in(ride.id)" class="btn btn-success">Attending</button>
-            </div>
-            <div class="col-md-4">
-                <button ng-click="out(ride.id)" class="btn btn-danger">Not Attending</button>
-            </div>
-
+    <div class="col-md-6">
+        <h4>{{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
+        <div class="col-md-4">
+            <button ng-click="in(bunch.id)" class="btn btn-success">Attending</button>
         </div>
-        <div class="col-md-6">
-            <div riders ride=ride></div>
+        <div class="col-md-4">
+            <button ng-click="out(bunch.id)" class="btn btn-danger">Not Attending</button>
         </div>
-        <div class="col-md-12">
-            <hr>
-        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Riders attending</h4>
+        <span ng-repeat="rider in bunch.riderarray " style="padding-right:10px;">
+            <img class="roundrect" src={{rider.imageurl}} tooltip={{rider.firstname}}></img>
+        </span>
+    </div>
+    <div class="col-md-12">
+        <hr>
     </div>
 </div>
 <div ng-repeat="bunch in oneoffbunches">
-    <div ng-repeat="ride in bunch.rides">
-        <div class="col-md-6">
-            <h4>{{bunch.name}} @ {{ride.date | date : 'mediumTime'}}</h4>
-            <div class="col-md-4">
-                <button ng-click="in(ride.id)" class="btn btn-success">Attending</button>
-            </div>
-            <div class="col-md-4">
-                <button ng-click="out(ride.id)" class="btn btn-danger">Not Attending</button>
-            </div>
+    <div class="col-md-6">
+        <h4>{{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
+        <div class="col-md-4">
+            <button ng-click="in(bunch.id)" class="btn btn-success">Attending</button>
         </div>
-        <div class="col-md-6">
-            <div riders ride=ride></div>
+        <div class="col-md-4">
+            <button ng-click="out(bunch.id)" class="btn btn-danger">Not Attending</button>
         </div>
-        <div class="col-md-12">
-            <hr>
-        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Riders attending</h4>
+        <span ng-repeat="rider in bunch.riderarray " style="padding-right:10px;">
+            <img class="roundrect" src={{rider.imageurl}} tooltip={{rider.firstname}}></img>
+        </span>
+    </div>
+    <div class="col-md-12">
+        <hr>
     </div>
 </div>

@@ -37,18 +37,18 @@ angular.module('jwtApp')
         function getRides(dayofyear) {
             usSpinnerService.spin('loginSpin');
             bunchServices.getRidesByUserandDay(dayofyear).success(function (rides) {
-                console.log(rides);
                 $scope.bunches = rides;
+                console.log(rides);
                 drawMarkers(rides);
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
 
-        function getBunchesOneOff(dayofyear) {
+        function getRidesOneOff(dayofyear) {
             usSpinnerService.spin('loginSpin');
-            bunchServices.getBunchesByUserandDayOneOff(dayofyear).success(function (bunches) {
-                $scope.oneoffbunches = bunches;
-                drawMarkers(bunches);
+            bunchServices.getRidesByUserandDayOneOff(dayofyear).success(function (rides) {
+                $scope.oneoffbunches = rides;
+                drawMarkers(rides);
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
@@ -64,7 +64,7 @@ angular.module('jwtApp')
             var adddays = dateServices.DaysToAdd(dateServices.GetDayNumber(moment().format('dddd')), dateServices.GetDayNumber(activetab.title));
             var datefortab = moment().add(adddays, 'd');
             getRides(datefortab.dayOfYear());
-            getBunchesOneOff(datefortab.dayOfYear());
+            getRidesOneOff(datefortab.dayOfYear());
             $scope.dayofweekdisplay = datefortab.toDate();
         }
 
