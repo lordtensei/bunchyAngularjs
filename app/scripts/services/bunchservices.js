@@ -6,7 +6,7 @@ angular.module('jwtApp')
             getRidesByUserandDay: function (id) {
                 return $http.get(API_URL + 'bunch/getridesbylocationandday?id=' + id)
             },
-            getBunchesByUsers: function () {
+            getBunchesByUser: function () {
                 return $http.get(API_URL + 'bunch/byuser');
             },
             getRidesByUserandDayOneOff: function (id) {

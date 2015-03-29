@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('MyteamsCtrl', function ($scope, $state, usSpinnerService, bunchServices) {
+    .controller('MyteamsCtrl', function ($scope, $state, usSpinnerService, bunchServices, alert) {
 
         $scope.bunches = {};
 
@@ -37,7 +37,7 @@ angular.module('jwtApp')
 
         function getBunches() {
             usSpinnerService.spin('loginSpin');
-            bunchServices.getBunchesByUsers().success(function (bunches) {
+            bunchServices.getBunchesByUser().success(function (bunches) {
                 $scope.bunches = bunches;
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);

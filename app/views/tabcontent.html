@@ -6,7 +6,8 @@
 </div>
 <div ng-repeat="bunch in bunches">
     <div class="col-md-6">
-        <h4>{{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
+        <h4>Team: {{bunch.bunchname}}<h4> 
+        <h4>Ride: {{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
         <div class="col-md-4">
             <button ng-click="in(bunch.id)" class="btn btn-success">Attending</button>
         </div>
@@ -26,7 +27,8 @@
 </div>
 <div ng-repeat="bunch in oneoffbunches">
     <div class="col-md-6">
-        <h4>{{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
+        <h4>Team: {{bunch.bunchname}}<h4> 
+        <h4>Ride: {{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
         <div class="col-md-4">
             <button ng-click="in(bunch.id)" class="btn btn-success">Attending</button>
         </div>

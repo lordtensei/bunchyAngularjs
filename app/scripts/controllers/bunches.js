@@ -38,7 +38,6 @@ angular.module('jwtApp')
             usSpinnerService.spin('loginSpin');
             bunchServices.getRidesByUserandDay(dayofyear).success(function (rides) {
                 $scope.bunches = rides;
-                console.log(rides);
                 drawMarkers(rides);
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
@@ -135,14 +134,13 @@ angular.module('jwtApp')
         $scope.in = function (rideid) {
             rideServices.addRider(rideid).success(function (rider) {
                 alert('success', "You'r in!", '');
-                console.log('success');
                 loadBunchesForActiveTab();
             }).error(errorCallback);
         }
 
         $scope.out = function (rideid) {
-            alert('danger', "You'r out! ", '');
             rideServices.removeRider(rideid).success(function (rider) {
+                alert('danger', "You'r out! ", '');
                 loadBunchesForActiveTab();
             }).error(errorCallback);
         }
