@@ -3,15 +3,14 @@
 angular.module('jwtApp')
     .controller('AddrideCtrl', function ($scope, $stateParams, $state, usSpinnerService, $auth, alert, stravaServices, locationServices, bunchServices, rideServices) {
 
-        function init() {
+        $scope.routePlaceholder = 'Enter route name';
+        $scope.routeButton = 'Add route';
+        $scope.routeButtonStrava = 'Add Strava route';
 
-            console.log($stateParams.bunchID);
+        function init() {
 
             $scope.bunch = {};
             $scope.routes = [];
-            $scope.routePlaceholder = 'Enter route name';
-            $scope.routeButton = 'Add route';
-            $scope.routeButtonStrava = 'Add Strava route';
             $scope.isstravaauth = {};
             $scope.showmap = {};
             $scope.cen = {};
