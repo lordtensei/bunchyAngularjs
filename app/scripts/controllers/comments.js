@@ -1,19 +1,24 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('CommentsCtrl', function ($scope, $stateParams) {
+    .controller('CommentsCtrl', function ($scope, $stateParams, rideServices, alert) {
 
         $scope.rideID = $stateParams.rideID;
-
 
         function init() {
 
         }
 
-
-        function addComment(rideid, comment) {
-
-
+        $scope.addComment = function (comment) {
+            rideServices.addComment({
+                rideid: $scope.rideID,
+                comment: $scope.comment
+            }).success(function () {
+                alert('success', "Comment added", '');
+                //$state.go('myteams');
+            }).error(function (err) {
+                alert('warning', "Unable to create team?", '');
+            });
         }
 
         function getComments(rideid) {
@@ -40,6 +45,4 @@ angular.module('jwtApp')
         }
 
         init();
-
-
     });
