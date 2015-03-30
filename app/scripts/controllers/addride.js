@@ -9,6 +9,9 @@ angular.module('jwtApp')
 
             $scope.bunch = {};
             $scope.routes = [];
+            $scope.routePlaceholder = 'Enter route name';
+            $scope.routeButton = 'Add route';
+            $scope.routeButtonStrava = 'Add Strava route';
             $scope.isstravaauth = {};
             $scope.showmap = {};
             $scope.cen = {};
@@ -78,6 +81,16 @@ angular.module('jwtApp')
                 activityid: $scope.stravaride.selected.id,
                 path: $scope.paths.p1.latlngs
             });
+            $scope.routeButtonStrava = 'Add another Strava route';
+        };
+
+        $scope.addRouteNonStrava = function () {
+            $scope.routes.push({
+                name: $scope.routename
+            });
+            $scope.routename = '';
+            $scope.routeButton = 'Add another route';
+            $scope.routePlaceholder = 'Enther another route name';
         };
 
         $scope.deleteRoute = function (idx) {
@@ -87,6 +100,7 @@ angular.module('jwtApp')
         $scope.getStravaActivities = function () {
             $scope.showmap = false;
             stravaServices.getStravaActivities().success(function (stravarides) {
+                //$scope.
                 $scope.stravarides = stravarides;
                 $scope.isstravaauth = true;
                 $scope.showmap = true;
