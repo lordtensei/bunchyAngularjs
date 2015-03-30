@@ -45,6 +45,12 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
         controller: 'MyteamsCtrl'
     })
 
+    .state('comments', {
+        url: '/comments:rideID',
+        templateUrl: 'views/comments.html',
+        controller: 'CommentsCtrl',
+    })
+
     .state('addride', {
         url: '/addride:bunchID',
         templateUrl: 'views/addride.html',

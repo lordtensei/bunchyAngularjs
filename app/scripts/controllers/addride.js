@@ -99,7 +99,6 @@ angular.module('jwtApp')
         $scope.getStravaActivities = function () {
             $scope.showmap = false;
             stravaServices.getStravaActivities().success(function (stravarides) {
-                //$scope.
                 $scope.stravarides = stravarides;
                 $scope.isstravaauth = true;
                 $scope.showmap = true;

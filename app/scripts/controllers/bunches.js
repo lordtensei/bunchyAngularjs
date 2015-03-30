@@ -122,6 +122,12 @@ angular.module('jwtApp')
             loadBunchesForActiveTab();
         };
 
+        $scope.gotocomments = function (ride) {
+            $state.go('comments', {
+                "rideID": ride.id
+            });
+        };
+
         $scope.addBunch = function () {
             usSpinnerService.spin('loginSpin');
             $state.go('bunchcreate');

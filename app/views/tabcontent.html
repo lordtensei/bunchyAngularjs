@@ -8,10 +8,10 @@
 <div ng-repeat="bunch in bunches | filter:searchText track by bunch.id">
     <div>
         <div>
-            <button tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> 3 </i></span>
+            <button ng-click="gotocomments(bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> 3 </i></span>
             </button>
             <span> </span>
-            <button tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
+            <button ng-click="gotocomments(bunch)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
             </button>
         </div>
         <div class="col-md-6">
@@ -36,23 +36,32 @@
     </div>
 </div>
 <div ng-repeat="bunch in oneoffbunches | filter:searchText track by bunch.id">
-    <div class="col-md-6 ">
-        <h4>Team: {{bunch.bunchname}}<h4> 
+    <div>
+        <div>
+            <button ng-click="gotocomments(bunch)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> 3 </i></span>
+            </button>
+            <span> </span>
+            <button ng-click="gotocomments(bunch)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
+            </button>
+        </div>
+        <div class="col-md-6 ">
+            <h4>Team: {{bunch.bunchname}}<h4> 
         <h4>Ride: {{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
-        <div class="col-md-4 ">
-            <button ng-click="in(bunch.id) " class="btn btn-success ">Attending</button>
+            <div class="col-md-4 ">
+                <button ng-click="in(bunch.id) " class="btn btn-success ">Attending</button>
+            </div>
+            <div class="col-md-4 ">
+                <button ng-click="out(bunch.id) " class="btn btn-danger ">Not Attending</button>
+            </div>
         </div>
-        <div class="col-md-4 ">
-            <button ng-click="out(bunch.id) " class="btn btn-danger ">Not Attending</button>
-        </div>
-    </div>
-    <div class="col-md-6 ">
-        <h4>Riders attending</h4>
-        <span ng-repeat="rider in bunch.riderarray " style="padding-right:10px; ">
+        <div class="col-md-6 ">
+            <h4>Riders attending</h4>
+            <span ng-repeat="rider in bunch.riderarray " style="padding-right:10px; ">
             <img class="roundrect " src={{rider.imageurl}} tooltip={{rider.firstname}}></img>
         </span>
-    </div>
-    <div class="col-md-12 ">
-        <hr>
+        </div>
+        <div class="col-md-12 ">
+            <hr>
+        </div>
     </div>
 </div>
