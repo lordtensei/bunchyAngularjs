@@ -14,8 +14,8 @@ angular.module('jwtApp')
             addRideDetails: function (rideDetails) {
                 return $http.post(API_URL + 'ride/addridedetails', rideDetails)
             },
-            getCommentsByRideID: function (rideID) {
-                return $http.get(API_URL + 'ride/comments?id=', rideID)
+            getCommentsByRideID: function (rideid) {
+                return $http.get(API_URL + 'ride/getcomments?id=' + rideid)
             },
             addComment: function (comment) {
                 return $http.post(API_URL + 'ride/addcomment', comment)

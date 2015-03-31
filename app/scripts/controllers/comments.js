@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('CommentsCtrl', function ($scope, $stateParams, rideServices, alert) {
+    .controller('CommentsCtrl', function ($scope, $state, $stateParams, usSpinnerService, rideServices, alert) {
 
         $scope.rideID = $stateParams.rideID;
 
         function init() {
-
+            getComments($scope.rideID);
         }
 
         $scope.addComment = function (comment) {
@@ -15,20 +15,22 @@ angular.module('jwtApp')
                 comment: $scope.comment
             }).success(function () {
                 alert('success', "Comment added", '');
-                //$state.go('myteams');
+                getComments($scope.rideID);
+                //$state.go('comments');
             }).error(function (err) {
-                alert('warning', "Unable to create team?", '');
+                alert('warning', "Unable to add comment?", '');
             });
         }
 
         function getComments(rideid) {
-            //usSpinnerService.spin('loginSpin');
-            rideServices.getCommentsByRideID(RideID).success(function (comments) {
-                $scope.comments = comments;
-                //usSpinnerService.stop('loginSpin');
+            console.log(rideid);
+            usSpinnerService.spin('loginSpin');
+            rideServices.getCommentsByRideID(rideid).success(function (commentlist) {
+                $scope.comments = commentlist;
+                console.log($scope.comments);
+                usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
-
 
         function errorCallback(err) {
             if (err == null) {
