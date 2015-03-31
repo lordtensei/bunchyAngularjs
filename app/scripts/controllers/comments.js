@@ -3,31 +3,36 @@
 angular.module('jwtApp')
     .controller('CommentsCtrl', function ($scope, $state, $stateParams, usSpinnerService, rideServices, alert) {
 
-        $scope.rideID = $stateParams.rideID;
+        $scope.rideid = $stateParams.rideid;
 
         function init() {
-            getComments($scope.rideID);
+            getComments($scope.rideid);
+            getRiders($scope.rideid);
         }
 
-        $scope.addComment = function (comment) {
+        $scope.addComment = function () {
             rideServices.addComment({
-                rideid: $scope.rideID,
+                rideid: $scope.rideid,
                 comment: $scope.comment
             }).success(function () {
                 alert('success', "Comment added", '');
-                getComments($scope.rideID);
+                getComments($scope.rideid);
                 //$state.go('comments');
             }).error(function (err) {
                 alert('warning', "Unable to add comment?", '');
             });
         }
 
+        function getRiders(rideid) {
+            rideServices.getRiders(rideid).success(function (riderlist) {
+                $scope.riders = riderlist;
+            }).error(errorCallback);
+        }
+
         function getComments(rideid) {
-            console.log(rideid);
             usSpinnerService.spin('loginSpin');
             rideServices.getCommentsByRideID(rideid).success(function (commentlist) {
                 $scope.comments = commentlist;
-                console.log($scope.comments);
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }

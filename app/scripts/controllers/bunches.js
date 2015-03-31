@@ -52,10 +52,6 @@ angular.module('jwtApp')
             }).error(errorCallback);
         }
 
-        function getRiders(rideid) {
-            rideServices.getRiders(rideid).success(function (riders) {}).error(errorCallback);
-        }
-
         function loadBunchesForActiveTab() {
             var activetab = $scope.active();
             $scope.center = {};
@@ -122,9 +118,10 @@ angular.module('jwtApp')
             loadBunchesForActiveTab();
         };
 
-        $scope.gotocomments = function (ride) {
+        $scope.gotocomments = function (rideid) {
+            console.log('ffff' + rideid);
             $state.go('comments', {
-                "rideID": ride.id
+                "rideid": rideid
             });
         };
 

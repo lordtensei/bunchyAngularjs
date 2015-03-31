@@ -1,11 +1,20 @@
 <span style="position: absolute;display: block;top: 50%;left: 50%;" us-spinner="{radius:20, width:8, length: 16, color:'#8dc63f'}" spinner-key="loginSpin" spinner-start-active="false"></span>
 <hr>
-<div>
-    <h3>Attending and Comments</h3>
-</div>
-<h3>Comments</h3>
-<hr>
 <div class="container">
+    <div>
+        <h3>Attending and Comments</h3>
+    </div>
+    <h4>Riders</h4>
+    <div>
+        <div class="row" ng-repeat="rider in riders">
+            <div class="commenterImage">
+                <img src={{rider.imageurl}} />
+            </div>
+        </div>
+    </div>
+    <h4>Comments</h4>
+    <hr>
+
     <div>
         <ul>
             <div class="row" ng-repeat="comment in comments">

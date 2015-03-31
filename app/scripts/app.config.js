@@ -46,7 +46,7 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
     })
 
     .state('comments', {
-        url: '/comments:rideID',
+        url: '/comments:rideid',
         templateUrl: 'views/comments.html',
         controller: 'CommentsCtrl',
     })
