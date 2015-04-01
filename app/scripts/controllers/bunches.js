@@ -119,9 +119,14 @@ angular.module('jwtApp')
         };
 
         $scope.gotocomments = function (rideid) {
-            console.log('ffff' + rideid);
             $state.go('comments', {
                 "rideid": rideid
+            });
+        };
+
+        $scope.details = function (ridedetailid) {
+            $state.go('ridedetails', {
+                "ridedetailid": ridedetailid
             });
         };
 

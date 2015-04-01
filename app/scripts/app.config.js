@@ -57,6 +57,12 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
         controller: 'AddrideCtrl',
     })
 
+    .state('ridedetails', {
+        url: '/ridedetails:ridedetailid',
+        templateUrl: 'views/ridedetails.html',
+        controller: 'RidedetailsCtrl',
+    })
+
     .state('logout', {
         url: '/logout',
         controller: 'LogoutCtrl'

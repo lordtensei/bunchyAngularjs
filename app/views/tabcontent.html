@@ -6,6 +6,11 @@
 </div>
 
 <div ng-repeat="bunch in bunches | filter:searchText track by bunch.id">
+    <div class="col-md-12">
+        <button ng-click="details(bunch.ridedetailid)" tooltip="details" class="btn btn-block btn-success"><span><i class="fa fa-bicycle fa-lg"></i></span>
+        </button>
+        <p></p>
+    </div>
     <div>
         <div>
             <button ng-click="gotocomments(bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> {{bunch.commentcount}} </i></span>
@@ -18,10 +23,11 @@
             <h4><b>Team:</b> {{bunch.bunchname}}<h4>
         <h4><b>Ride:</b> {{bunch.name}} @ {{bunch.date | date : 'mediumTime'}}</h4>
             <div class="col-md-4">
-                <button ng-click="in(bunch.id)" class="btn btn-success">Attending</button>
+                <button ng-click="in(bunch.id)" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i> Attending
+                </button>
             </div>
             <div class="col-md-4">
-                <button ng-click="out(bunch.id)" class="btn btn-danger">Not Attending</button>
+                <button ng-click="out(bunch.id)" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i> Not attending</button>
             </div>
         </div>
         <div class="col-md-6">
