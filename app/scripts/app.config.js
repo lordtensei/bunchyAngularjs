@@ -33,6 +33,12 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
         controller: 'BunchesCtrl'
     })
 
+    .state('friends', {
+        url: '/friends',
+        templateUrl: 'views/friends.html',
+        controller: 'FriendsCtrl'
+    })
+
     .state('bunchcreate', {
         url: '/bunchcreate',
         templateUrl: 'views/bunchcreate.html',

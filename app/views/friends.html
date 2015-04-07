@@ -1,0 +1,9 @@
+<h3>Friends</h3>
+
+<div ng-repeat="friend in friends">{{friend.firstname}} {{friend.lastname}}
+    <button ng-click="removeFriend(friend.id) " class="btn btn-success ">Remove friend</button>
+</div>
+
+<div ng-repeat="nonfriend in nonfriends">{{nonfriend.firstname}} {{nonfriend.lastname}}
+    <button ng-click="addFriend(nonfriend.id) " class="btn btn-success ">Add friend</button>
+</div>
