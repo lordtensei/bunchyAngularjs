@@ -36,10 +36,13 @@
     </div>
     <p></p>
     <h4>Routes</h4>
-    <div ng-show="isstravaauth && !showmap">Loading strava routes......
-    </div>
 
-    <div ng-show="isstravaauth && showmap">
+    <button ng-show="custombutton" type="button" ng-disabled="" class="btn btn-success" ng-click="addStravaRoute();">Add a Strava Route</button>
+    <button ng-show="stravabutton" type="button" ng-disabled="" class="btn btn-success" ng-click="addCustomRoute();">Add a Custom Route</button>
+
+
+
+    <div ng-show="isstravaauth && showmap && strava">
         <hr>
         <h4>Strava Route</h4>
         <!--<div>{{stravaride.selected.map.summary_polyline}}</div>-->
@@ -56,18 +59,23 @@
         <p></p>
         <button type="button" ng-disabled="stravaride.selected == undefined" class="btn btn-success" ng-click="addRoute();">{{routeButtonStrava}}</button>
     </div>
-    <hr>
-    <div ng-show="!isstravaauth">
+
+    <p></p>
+
+    <div ng-show="!isstravaauth && strava">
+        <div ng-show="isstravaauth && !showmap">Loading strava routes......
+        </div>
         <div>
             <button type="button" class="btn btn-success" ng-click="stravaAuth();">Login with strava to add strava routes</button>
         </div>
     </div>
     <p></p>
     <p></p>
-    <span><input class="form-control" ng-model="routename" name="routename" type="text" placeholder="{{routePlaceholder}}" ></span>
-    <p></p>
-    <button type="button" ng-disabled="!addride.routename.$dirty" class="btn btn-success" ng-click="addRouteNonStrava();">{{routeButton}}</button>
-
+    <div ng-show="custom">
+        <span><input class="form-control" ng-model="routename" name="routename" type="text" placeholder="{{routePlaceholder}}" ></span>
+        <p></p>
+        <button type="button" ng-disabled="!addride.routename.$dirty" class="btn btn-success" ng-click="addRouteNonStrava();">{{routeButton}}</button>
+    </div>
     <div ng-show="routes.length > 0">
         <hr>
         <h4>Routes for team {{bunch.name}}</h4>
@@ -89,6 +97,9 @@
     <hr>
     <p></p>
     <button ng-click="" ng-disabled="addride.$invalid" class="btn btn-lg btn-success btn-block" type="submit">
-        Add ride to team {{bunch.name}}
+        {{addRideButton}} {{bunch.name}}
+    </button>
+    <button ng-click="done()" class="btn btn-lg btn-success btn-block" type="button">
+        Done
     </button>
 </form>

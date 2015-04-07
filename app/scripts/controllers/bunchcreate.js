@@ -115,9 +115,13 @@ angular.module('jwtApp')
                 startlocation: startlocation,
                 website: $scope.website,
                 private: $scope.private
-            }).success(function () {
+            }).success(function (result) {
+                //console.log(result);
+                $scope.bunch = result;
                 alert('success', "Team created", '');
-                $state.go('myteams');
+                $state.go('addride', {
+                    "bunchID": $scope.bunch.id
+                });
             }).error(function (err) {
                 alert('warning', "Unable to create team?", '');
             });

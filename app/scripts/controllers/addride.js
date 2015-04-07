@@ -6,6 +6,10 @@ angular.module('jwtApp')
         $scope.routePlaceholder = 'Enter route name';
         $scope.routeButton = 'Add route';
         $scope.routeButtonStrava = 'Add Strava route';
+        $scope.addRideButton = 'Add Ride to bunch';
+        $scope.custombutton = true;
+        $scope.stravabutton = true;
+
 
         function init() {
 
@@ -96,6 +100,18 @@ angular.module('jwtApp')
             $scope.routes.splice(idx, 1);
         };
 
+        $scope.addStravaRoute = function () {
+            $scope.strava = true;
+            $scope.showmap = true;
+            $scope.custom = false;
+        };
+
+        $scope.addCustomRoute = function () {
+            $scope.strava = false;
+            $scope.showmap = false;
+            $scope.custom = true;
+        };
+
         $scope.getStravaActivities = function () {
             $scope.showmap = false;
             stravaServices.getStravaActivities().success(function (stravarides) {
@@ -141,6 +157,20 @@ angular.module('jwtApp')
             })
         };
 
+        function resetFields() {
+
+            $scope.name = '';
+
+
+
+        };
+
+        $scope.done = function () {
+
+            $state.go('myteams');
+
+        };
+
         $scope.submit = function () {
 
             if ($scope.oneoffradio == 'Yes') {
@@ -160,8 +190,10 @@ angular.module('jwtApp')
                 routes: $scope.routes,
                 oneoffdate: $scope.oneoffdate
             }).success(function () {
-                alert('success', "Team created", '');
-                $state.go('myteams');
+                alert('success', "Ride added", '');
+                $scope.addRideButton = 'Add another Ride to bunch ';
+                resetFields();
+                //$state.go('myteams');
             }).error(function (err) {
                 alert('warning', "Unable to create team?", '');
             });
