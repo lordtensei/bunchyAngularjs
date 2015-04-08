@@ -35,6 +35,13 @@ angular.module('jwtApp')
             });
         };
 
+        $scope.editBunch = function (bunch) {
+            usSpinnerService.spin('loginSpin');
+            $state.go('editbunch', {
+                "bunchID": bunch.id
+            });
+        };
+
         function getBunches() {
             usSpinnerService.spin('loginSpin');
             bunchServices.getBunchesByUser().success(function (bunches) {
