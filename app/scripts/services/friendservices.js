@@ -12,6 +12,11 @@ angular.module('jwtApp')
             getNonFriends: function () {
                 return $http.get(API_URL + 'friends/notfriends')
             },
+            inviteFriend: function (friendid) {
+                return $http.post(API_URL + 'friends/invitefriend', {
+                    friendid: friendid
+                })
+            },
             addFriend: function (friendid) {
                 return $http.post(API_URL + 'friends/addfriend', {
                     friendid: friendid

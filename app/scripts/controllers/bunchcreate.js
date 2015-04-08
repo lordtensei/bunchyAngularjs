@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('BunchcreateCtrl', function ($scope, $http, API_URL, leafletData, alert, $state, $auth, usSpinnerService, locationServices, bunchServices) {
+    .controller('BunchcreateCtrl', function ($scope, $http, API_URL, leafletData, alert, $state, $auth, usSpinnerService, locationServices, bunchServices, friendServices) {
 
         function init() {
+
+            $scope.friendsinvited = [];
 
             $scope.profiles = [{
                 name: 'Personal'
@@ -51,12 +53,34 @@ angular.module('jwtApp')
                             draggable: true
                         }
                     }
-            }).error(function () {
-                console.log('unable to get locations');
-                alert('success', 'Please select a location');
-                $state.go('locationset');
-            });
+            }).error(errorCallback);
+
+            getFriends();
         }
+
+        function errorCallback(err) {
+            if (err == null) {
+                alert('warning', "unable to create bunch! ", "No web server?");
+                $state.go('login');
+            }
+            if (err.message == 'location_not_set') {
+                alert('warning', "Please set your location", "");
+                $state.go('locationset');
+            } else {
+                alert('warning', "unable to create bunch! ", err.message);
+                $state.go('login');
+            }
+        }
+
+        function getFriends() {
+            //usSpinnerService.spin('loginSpin');
+            friendServices.getFriends().success(function (friends) {
+                console.log(friends);
+                $scope.friends = friends;
+                // usSpinnerService.stop('loginSpin');
+            }).error(errorCallback);
+        }
+
 
         $scope.center = {};
         $scope.privateradio = 'No';
@@ -93,6 +117,18 @@ angular.module('jwtApp')
             $scope.markers.mainMarker.lng = leafEvent.latlng.lng;
         });
 
+        $scope.inviteFriend = function (friendid, fname, lname) {
+            $scope.friendsinvited.push({
+                id: friendid,
+                fname: fname,
+                lname: lname
+            });
+        };
+
+        $scope.unInviteFriend = function (idx) {
+            $scope.friendsinvited.splice(idx, 1);
+        };
+
         $scope.submit = function () {
 
             var startlocation = [{
@@ -114,7 +150,8 @@ angular.module('jwtApp')
                 profile: $scope.profile.selected.name,
                 startlocation: startlocation,
                 website: $scope.website,
-                private: $scope.private
+                private: $scope.private,
+                invited: $scope.friendsinvited
             }).success(function (result) {
                 //console.log(result);
                 $scope.bunch = result;
@@ -122,9 +159,8 @@ angular.module('jwtApp')
                 $state.go('addride', {
                     "bunchID": $scope.bunch.id
                 });
-            }).error(function (err) {
-                alert('warning', "Unable to create team?", '');
-            });
+            }).error(errorCallback);
         }
+
         init();
     });

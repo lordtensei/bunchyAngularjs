@@ -3,7 +3,7 @@
 </div>
 <div>
     <form ng-submit="submit()" name="createbunch" class="form" novalidate>
-        <h3 class="form-signin-heading">Create a team.</h3>
+        <h3 class="form-signin-heading">Create a bunch.</h3>
         <hr>
         <input name="name" ng-model="name" type="text" class="form-control" placeholder="Name of team" required />
         <p></p>
@@ -18,7 +18,6 @@
             <input name="website" ng-model="website" type="text" class="form-control" placeholder="Website" />
         </div>
 
-
         <div>
             <div class="btn-group">
                 <h4>Is this a private team? {{privateradio || 'null'}}</h4>
@@ -26,6 +25,33 @@
                 <label class="btn btn-success" ng-model="privateradio" btn-radio="'No'">No</label>
             </div>
         </div>
+        <div>
+            <p></p>
+            <div ng-show="privateradio == 'Yes'">
+                <hr>
+                <div ng-show="friends.length > 0">
+                    <h4>Invite Friends</h4>
+                    <div ng-repeat="friend in friends">{{friend.firstname}} {{friend.lastname}}
+                        <button ng-click="inviteFriend(friend.id, friend.firstname, friend.lastname)" type="button" class="btn btn-success">Invite</button>
+                        <p></p>
+                    </div>
+
+                    <h3>Invited</h3>
+                    <div ng-repeat="invited in friendsinvited">
+                        {{invited.fname}} {{invited.lname}}
+                    </div>
+                </div>
+
+                <div ng-show="friends.length <= 0">
+                    <h4>Only friends that you invite can see rides for a private bunch but it seems that you don't yet have any friends!
+                        <br>
+                        <br>
+                        Don't worry you will be able to invite them later!</h4>
+                </div>
+                <hr>
+            </div>
+        </div>
+
         <p></p>
         <h4>Meeting location</h4>
         <leaflet class="form-control" markers="markers" id="meetinglocation" defaults="defaults" center="center" height="200px" ng-click="logLeafletData('meetinglocation')"></leaflet>
