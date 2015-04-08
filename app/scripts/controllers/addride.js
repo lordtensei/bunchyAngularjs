@@ -6,7 +6,7 @@ angular.module('jwtApp')
         $scope.routePlaceholder = 'Enter route name';
         $scope.routeButton = 'Add route';
         $scope.routeButtonStrava = 'Add Strava route';
-        $scope.addRideButton = 'Add Ride to bunch';
+        $scope.addRideButton = 'Add Ride to ';
         $scope.custombutton = true;
         $scope.stravabutton = true;
 
