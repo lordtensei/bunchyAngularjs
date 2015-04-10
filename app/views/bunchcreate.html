@@ -39,6 +39,9 @@
                     <h3>Invited</h3>
                     <div ng-repeat="invited in friendsinvited">
                         {{invited.fname}} {{invited.lname}}
+
+                        <button ng-click="unInviteFriend($index)" class="btn btn-danger">Remove</button>
+
                     </div>
                 </div>
 
