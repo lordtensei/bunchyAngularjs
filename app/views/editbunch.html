@@ -1,1 +1,8 @@
 <h3>Edit bunch</h3>
+
+<form ng-submit="submit()" name="editbunch" class="form" novalidate>
+    <input name="bunch.name" ng-model="bunch.name" type="text" class="form-control" placeholder="Name of team" required />
+    <button ng-click="" ng-disabled="editbunch.$invalid" class="btn btn-lg btn-success btn-block" type="submit">
+        Save
+    </button>
+</form>

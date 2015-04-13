@@ -15,6 +15,10 @@ angular.module('jwtApp')
             getBunchByID: function (id) {
                 return $http.get(API_URL + 'bunch/' + id)
             },
+            editBunch: function (bunch) {
+                console.log(bunch);
+                return $http.post(API_URL + 'bunch/edit', bunch)
+            },
             createBunch: function (bunch) {
                 return $http.post(API_URL + 'bunch/create', bunch)
             }
