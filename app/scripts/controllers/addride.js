@@ -158,17 +158,11 @@ angular.module('jwtApp')
         };
 
         function resetFields() {
-
             $scope.name = '';
-
-
-
         };
 
         $scope.done = function () {
-
             $state.go('myteams');
-
         };
 
         $scope.submit = function () {
