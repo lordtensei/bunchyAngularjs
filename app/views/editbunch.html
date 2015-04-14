@@ -2,7 +2,80 @@
 
 <form ng-submit="submit()" name="editbunch" class="form" novalidate>
     <input name="bunch.name" ng-model="bunch.name" type="text" class="form-control" placeholder="Name of team" required />
-    <button ng-click="" ng-disabled="editbunch.$invalid" class="btn btn-lg btn-success btn-block" type="submit">
+    <p></p>
+    <ui-select theme="bootstrap" ng-model="profile.selected" required>
+        <ui-select-match placeholder="Select profile...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="profile in profiles | filter:{ name: $select.search }">
+            <div ng-bind-html="profile.name"></div>
+        </ui-select-choices>
+    </ui-select>
+    <p></p>
+    <div ng-show="profile.selected.name == 'Business'">
+        <input name="website" ng-model="website" type="text" class="form-control" placeholder="Website" />
+    </div>
+
+    <div>
+        <ui-select theme="bootstrap" ng-model="private.selected" required>
+            <ui-select-match>{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="private in privateoptions | filter:{ name: $select.search }">
+                <div ng-bind-html="private.name"></div>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div>
+        <p></p>
+        <div ng-show="private.selected.name == 'Private'">
+            <hr>
+            <div ng-show="friends.length > 0">
+                <h4>Invite Friends</h4>
+                <div ng-repeat="friend in friends">{{friend.firstname}} {{friend.lastname}}
+                    <button ng-click="inviteFriend(friend.id, friend.firstname, friend.lastname)" type="button" class="btn btn-success">Invite</button>
+                    <p></p>
+                </div>
+
+                <h3>Invited</h3>
+                <div ng-repeat="invited in friendsinvited">
+                    {{invited.fname}} {{invited.lname}}
+
+                    <button ng-click="unInviteFriend($index)" class="btn btn-danger">Remove</button>
+
+                </div>
+            </div>
+
+            <div ng-show="friends.length <= 0">
+                <h4>Only friends that you invite can see rides for a private bunch but it seems that you don't yet have any friends!
+                        <br>
+                        <br>
+                        Don't worry you will be able to invite them later!</h4>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <p></p>
+    <h4>Meeting location</h4>
+    <leaflet class="form-control" markers="markers" id="meetinglocation" defaults="defaults" center="center" height="200px" ng-click="logLeafletData('meetinglocation')"></leaflet>
+    <p></p>
+    <ui-select theme="bootstrap" ng-model="ability.selected" required>
+        <ui-select-match placeholder="Select ability...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="ability in abilities | filter:{ name: $select.search }">
+            <div ng-bind-html="ability.name"></div>
+        </ui-select-choices>
+    </ui-select>
+    <p></p>
+    <ui-select theme="bootstrap" ng-model="policy.selected" required>
+        <ui-select-match placeholder="Select policy...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="policy in policies | filter:{ name: $select.search }">
+            <div ng-bind-html="policy.name"></div>
+        </ui-select-choices>
+    </ui-select>
+
+    <p></p>
+    <textarea name="desc" ng-model="desc" type="desc" class="form-control" placeholder="About" />
+    <div>
+    </div>
+    <p></p>
+    <button ng-click="" class="btn btn-lg btn-success btn-block" type="submit">
         Save
     </button>
 </form>

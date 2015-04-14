@@ -53,6 +53,7 @@ angular.module('jwtApp')
         }
 
         function loadBunchesForActiveTab() {
+            usSpinnerService.spin('loginSpin');
             var activetab = $scope.active();
             $scope.center = {};
             $scope.markers = [];
@@ -61,6 +62,7 @@ angular.module('jwtApp')
             getRides(datefortab.dayOfYear());
             getRidesOneOff(datefortab.dayOfYear());
             $scope.dayofweekdisplay = datefortab.toDate();
+            usSpinnerService.stop('loginSpin');
         }
 
         $scope.tabs = [
