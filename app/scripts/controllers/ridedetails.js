@@ -21,6 +21,27 @@ angular.module('jwtApp')
             }).error(errorCallback);
         }
 
+        $scope.addComment = function () {
+            rideServices.addComment({
+                rideid: $scope.rideid,
+                comment: $scope.comment
+            }).success(function () {
+                alert('success', "Comment added", '');
+                getComments($scope.rideid);
+                //$state.go('comments');
+            }).error(function (err) {
+                alert('warning', "Unable to add comment?", '');
+            });
+        }
+
+        function getComments(rideid) {
+            usSpinnerService.spin('loginSpin');
+            rideServices.getCommentsByRideID(rideid).success(function (commentlist) {
+                $scope.ridedetails.comments = commentlist;
+                usSpinnerService.stop('loginSpin');
+            }).error(errorCallback);
+        }
+
         function errorCallback(err) {
             if (err == null) {
                 alert('warning', "unable to get bunches! ", "No web server?");

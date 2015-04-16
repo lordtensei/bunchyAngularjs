@@ -1,3 +1,5 @@
+<span style="position: absolute;display: block;top: 50%;left: 50%;" us-spinner="{radius:20, width:8, length: 16, color:'#8dc63f'}" spinner-key="loginSpin" spinner-start-active="false"></span>
+<hr>
 <p>Ride details</p>
 <p>Team name: {{ridedetails.bunchname}} </p>
 <p>Ride name: {{ridedetails.name}} </p>
@@ -9,6 +11,33 @@
         </div>
     </div>
 </div>
+<h4>Comments</h4>
+<hr>
+
+<div>
+    <ul>
+        <div class="row" ng-repeat="comment in ridedetails.comments">
+            <li>
+                <div class="commenterImage">
+                    <img src={{comment.imageurl}} />
+                </div>
+                <div class="commentText">
+                    <p class="">{{comment.comment}}</p>
+                    <!--<span class="date sub-text">on March 5th, 2014</span>-->
+                </div>
+            </li>
+        </div>
+    </ul>
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <input class="form-control" name="comment" ng-model="comment" type="text" placeholder="Your comments" />
+        </div>
+        <div class="form-group">
+            <button ng-click="addComment()" class="btn btn-default">Add</button>
+        </div>
+    </form>
+</div>
+
 <p>Routes</p>
 <hr>
 <div ng-repeat="route in ridedetails.routes">
