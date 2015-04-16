@@ -4,16 +4,18 @@ angular.module('jwtApp')
     .controller('RidedetailsCtrl', function ($scope, alert, $state, $stateParams, usSpinnerService, rideServices) {
 
         $scope.ridedetailid = $stateParams.ridedetailid;
+        $scope.rideid = $stateParams.rideid;
+        console.log($scope.rideid);
 
         function init() {
-            getRidedetails($scope.ridedetailid);
+            getRidedetails($scope.ridedetailid, $scope.rideid);
 
 
         };
 
 
-        function getRidedetails(ridedetailid) {
-            rideServices.getRidedetails(ridedetailid).success(function (ridedetails) {
+        function getRidedetails(ridedetailid, rideid) {
+            rideServices.getRidedetails(ridedetailid, rideid).success(function (ridedetails) {
                 $scope.ridedetails = ridedetails;
                 console.log(ridedetails);
             }).error(errorCallback);

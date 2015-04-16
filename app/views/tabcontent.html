@@ -7,7 +7,7 @@
 
 <div ng-repeat="bunch in bunches | filter:searchText track by bunch.id">
     <div class="col-md-12">
-        <button ng-click="details(bunch.ridedetailid)" tooltip="details" class="btn btn-block btn-success"><span><i class="fa fa-bicycle fa-lg"></i></span>
+        <button ng-click="details(bunch.ridedetailid, bunch.id)" tooltip="details" class="btn btn-block btn-success"><span><i class="fa fa-bicycle fa-lg"></i></span>
         </button>
         <p></p>
     </div>

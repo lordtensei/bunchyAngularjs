@@ -122,6 +122,10 @@ angular.module('jwtApp')
             $scope.friendsinvited.splice(idx, 1);
         };
 
+        $scope.cancel = function () {
+            $state.go('myteams');
+        };
+
         $scope.submit = function () {
 
             if ($scope.private.selected.name == 'Private') {

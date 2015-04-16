@@ -1,10 +1,16 @@
 <p>Ride details</p>
 <p>Team name: {{ridedetails.bunchname}} </p>
 <p>Ride name: {{ridedetails.name}} </p>
+<h4>Riders</h4>
+<div>
+    <div class="row" ng-repeat="rider in ridedetails.riders">
+        <div class="commenterImage">
+            <img src={{rider.imageurl}} />
+        </div>
+    </div>
+</div>
 <p>Routes</p>
 <hr>
 <div ng-repeat="route in ridedetails.routes">
-
     <p>{{route.name}}</p>
-
 </div>

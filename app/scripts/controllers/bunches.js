@@ -126,9 +126,11 @@ angular.module('jwtApp')
             });
         };
 
-        $scope.details = function (ridedetailid) {
+        $scope.details = function (ridedetailid, rideid) {
+            console.log(rideid);
             $state.go('ridedetails', {
-                "ridedetailid": ridedetailid
+                "ridedetailid": ridedetailid,
+                "rideid": rideid
             });
         };
 

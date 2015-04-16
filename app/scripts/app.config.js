@@ -70,7 +70,7 @@ angular.module('jwtApp').config(function ($urlRouterProvider, $stateProvider, $h
     })
 
     .state('ridedetails', {
-        url: '/ridedetails:ridedetailid',
+        url: '/ridedetails:ridedetailid?rideid',
         templateUrl: 'views/ridedetails.html',
         controller: 'RidedetailsCtrl',
     })
