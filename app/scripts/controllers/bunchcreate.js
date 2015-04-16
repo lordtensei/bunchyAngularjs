@@ -75,7 +75,6 @@ angular.module('jwtApp')
         function getFriends() {
             //usSpinnerService.spin('loginSpin');
             friendServices.getFriends().success(function (friends) {
-                console.log(friends);
                 $scope.friends = friends;
                 // usSpinnerService.stop('loginSpin');
             }).error(errorCallback);

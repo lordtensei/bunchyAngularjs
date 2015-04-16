@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jwtApp')
-    .controller('EditbunchCtrl', function ($state, $scope, $stateParams, bunchServices, alert) {
+    .controller('EditbunchCtrl', function ($state, $scope, $stateParams, bunchServices, friendServices, alert) {
 
         function init() {
             $scope.friendsinvited = [];
@@ -44,6 +44,15 @@ angular.module('jwtApp')
 
             bunchServices.getBunchByID($stateParams.bunchID).success(function (bunch) {
                 $scope.bunch = bunch;
+
+                $scope.ability.selected = {
+                    "name": bunch.ability
+                };
+
+                $scope.policy.selected = {
+                    "name": bunch.policy
+                };
+
                 $scope.profile.selected = {
                     "name": bunch.profile
                 };
@@ -73,10 +82,16 @@ angular.module('jwtApp')
                         }
                     }
 
+                //Add invited friends to friends array
+                angular.forEach(bunch.invited, function (value, key) {
+                    $scope.friendsinvited.push(value);
+                });
 
             }).error(function () {
-                alert('success', 'unable to get bunch');
+                alert('warning', 'unable to get bunch');
             });
+
+            getFriends();
         }
 
         $scope.$on("leafletDirectiveMap.click", function (event, args) {
@@ -84,6 +99,28 @@ angular.module('jwtApp')
             $scope.markers.mainMarker.lat = leafEvent.latlng.lat;
             $scope.markers.mainMarker.lng = leafEvent.latlng.lng;
         });
+
+        function getFriends() {
+            //usSpinnerService.spin('loginSpin');
+            friendServices.getFriends().success(function (friends) {
+                $scope.friends = friends;
+                // usSpinnerService.stop('loginSpin');
+            }).error(function () {
+                alert('warning', 'unable to get friends');
+            });
+        }
+
+        $scope.inviteFriend = function (friendid, fname, lname) {
+            $scope.friendsinvited.push({
+                id: friendid,
+                fname: fname,
+                lname: lname
+            });
+        };
+
+        $scope.unInviteFriend = function (idx) {
+            $scope.friendsinvited.splice(idx, 1);
+        };
 
         $scope.submit = function () {
 
@@ -94,6 +131,10 @@ angular.module('jwtApp')
             }
 
             $scope.bunch.profile = $scope.profile.selected.name;
+            $scope.bunch.ability = $scope.ability.selected.name;
+            $scope.bunch.policy = $scope.policy.selected.name;
+
+            $scope.bunch.invited = $scope.friendsinvited;
 
             $scope.bunch.startlocation[0].lat = $scope.markers.mainMarker.lat;
             $scope.bunch.startlocation[0].lng = $scope.markers.mainMarker.lng;
