@@ -145,14 +145,14 @@ angular.module('jwtApp')
 
         $scope.in = function (rideid) {
             rideServices.addRider(rideid).success(function (rider) {
-                alert('success', "You'r in!", '');
+                alert('success', "You're in!", '');
                 loadBunchesForActiveTab();
             }).error(errorCallback);
         }
 
         $scope.out = function (rideid) {
             rideServices.removeRider(rideid).success(function (rider) {
-                alert('danger', "You'r out! ", '');
+                alert('danger', "You're out! ", '');
                 loadBunchesForActiveTab();
             }).error(errorCallback);
         }
