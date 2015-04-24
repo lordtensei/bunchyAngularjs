@@ -36,7 +36,7 @@ angular.module('jwtApp')
 
         function getRides(dayofyear) {
             usSpinnerService.spin('loginSpin');
-            bunchServices.getRidesByUserandDay(dayofyear).success(function (rides) {
+            rideServices.getRidesByUserandDay(dayofyear).success(function (rides) {
                 $scope.bunches = rides;
                 drawMarkers(rides);
                 usSpinnerService.stop('loginSpin');
@@ -45,7 +45,7 @@ angular.module('jwtApp')
 
         function getRidesOneOff(dayofyear) {
             usSpinnerService.spin('loginSpin');
-            bunchServices.getRidesByUserandDayOneOff(dayofyear).success(function (rides) {
+            rideServices.getRidesByUserandDayOneOff(dayofyear).success(function (rides) {
                 $scope.oneoffbunches = rides;
                 drawMarkers(rides);
                 usSpinnerService.stop('loginSpin');

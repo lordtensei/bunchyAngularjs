@@ -3,6 +3,12 @@
 angular.module('jwtApp')
     .factory('rideServices', function (API_URL, $http) {
         return {
+            getRidesByUserandDay: function (id) {
+                return $http.get(API_URL + 'ride/getridesbylocationandday?id=' + id)
+            },
+            getRidesByUserandDayOneOff: function (id) {
+                return $http.get(API_URL + 'ride/getoneoffridesbylocationandday?id=' + id)
+            },
             getUserRides: function () {
                 return $http.get(API_URL + 'ride/byuser')
             },
