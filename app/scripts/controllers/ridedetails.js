@@ -41,6 +41,14 @@ angular.module('jwtApp')
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
+    
+    function getRoutes(rideid) {
+            usSpinnerService.spin('loginSpin');
+            rideServices.getRoutesByRideID(rideid).success(function (routes) {
+                $scope.routes = routes;
+                usSpinnerService.stop('loginSpin');
+            }).error(errorCallback);
+        }
 
         function errorCallback(err) {
             if (err == null) {
