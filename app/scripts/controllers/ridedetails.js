@@ -9,10 +9,7 @@ angular.module('jwtApp')
 
         function init() {
             getRidedetails($scope.ridedetailid, $scope.rideid);
-
-
         };
-
 
         function getRidedetails(ridedetailid, rideid) {
             rideServices.getRidedetails(ridedetailid, rideid).success(function (ridedetails) {
@@ -49,6 +46,10 @@ angular.module('jwtApp')
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
+
+        $scope.back = function () {
+            $state.go('bunches');
+        };
 
         function errorCallback(err) {
             if (err == null) {

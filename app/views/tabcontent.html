@@ -13,10 +13,10 @@
     </div>
     <div>
         <div>
-            <button ng-click="gotocomments(bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> {{bunch.commentcount}} </i></span>
+            <button ng-click="details(bunch.ridedetailid, bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> {{bunch.commentcount}} </i></span>
             </button>
             <span> </span>
-            <button ng-click="gotocomments(bunch.id)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
+            <button ng-click="details(bunch.ridedetailid, bunch.id)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
             </button>
         </div>
         <div class="col-md-6">
