@@ -15,6 +15,7 @@ angular.module('jwtApp')
             rideServices.getRidedetails(ridedetailid, rideid).success(function (ridedetails) {
                 $scope.ridedetails = ridedetails;
                 console.log(ridedetails);
+                getRoutes(ridedetailid);
             }).error(errorCallback);
         }
 
@@ -38,10 +39,10 @@ angular.module('jwtApp')
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);
         }
-    
-    function getRoutes(rideid) {
+
+        function getRoutes(ridedetailid) {
             usSpinnerService.spin('loginSpin');
-            rideServices.getRoutesByRideID(rideid).success(function (routes) {
+            rideServices.getRoutesByRideDetailID(ridedetailid).success(function (routes) {
                 $scope.routes = routes;
                 usSpinnerService.stop('loginSpin');
             }).error(errorCallback);

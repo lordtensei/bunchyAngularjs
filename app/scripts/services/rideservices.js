@@ -23,7 +23,7 @@ angular.module('jwtApp')
             getCommentsByRideID: function (rideid) {
                 return $http.get(API_URL + 'ride/getcomments?id=' + rideid)
             },
-             getRoutesByRideID: function (rideid) {
+            getRoutesByRideDetailID: function (rideid) {
                 return $http.get(API_URL + 'ride/getroutes?id=' + rideid)
             },
             getRidedetails: function (ridedetailid, rideid) {

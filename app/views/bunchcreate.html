@@ -27,10 +27,11 @@
         </div>
         <div>
             <p></p>
-            <div ng-show="privateradio == 'Yes'">
+            <div>
                 <hr>
                 <div ng-show="friends.length > 0">
                     <h4>Invite Friends</h4>
+                    <p>If this is a private bunch only friends that you invite will be able to see the rides for this bunch.</p>
                     <div ng-repeat="friend in friends">{{friend.firstname}} {{friend.lastname}}
                         <button ng-click="inviteFriend(friend.id, friend.firstname, friend.lastname)" type="button" class="btn btn-success">Invite</button>
                         <p></p>
@@ -40,7 +41,8 @@
                     <div ng-repeat="invited in friendsinvited">
                         {{invited.fname}} {{invited.lname}}
 
-                        <button ng-click="unInviteFriend($index)" class="btn btn-danger">Remove</button>
+                        <button type="button" ng-click="unInviteFriend($index)" class="btn btn-danger">Remove</button>
+                        <button type="button" ng-click="makeAdmin($index)" class="btn btn-success">Make Admin</button>
 
                     </div>
                 </div>

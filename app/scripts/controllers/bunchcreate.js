@@ -6,6 +6,7 @@ angular.module('jwtApp')
         function init() {
 
             $scope.friendsinvited = [];
+            $scope.adminusers = [];
 
             $scope.profiles = [{
                 name: 'Personal'
@@ -124,6 +125,13 @@ angular.module('jwtApp')
             });
         };
 
+        $scope.makeAdmin = function (idx) {
+            $scope.adminusers.push(
+                $scope.friendsinvited[idx]
+            );
+            console.log($scope.friendsinvited);
+        };
+
         $scope.unInviteFriend = function (idx) {
             $scope.friendsinvited.splice(idx, 1);
         };
@@ -150,7 +158,8 @@ angular.module('jwtApp')
                 startlocation: startlocation,
                 website: $scope.website,
                 private: $scope.private,
-                invited: $scope.friendsinvited
+                invited: $scope.friendsinvited,
+                adminusers: $scope.adminusers
             }).success(function (result) {
                 //console.log(result);
                 $scope.bunch = result;
