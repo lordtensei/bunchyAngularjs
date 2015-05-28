@@ -44,7 +44,7 @@
 <div ng-repeat="bunch in oneoffbunches | filter:searchText track by bunch.id">
     <div>
         <div>
-            <button ng-click="gotocomments(bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> 3 </i></span>
+            <button ng-click="gotocomments(bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> {{bunch.commentcount}} </i></span>
             </button>
             <span> </span>
             <button ng-click="gotocomments(bunch.id)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
