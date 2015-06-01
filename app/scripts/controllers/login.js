@@ -4,14 +4,13 @@ angular.module('jwtApp')
     .controller('LoginCtrl', function ($scope, alert, usSpinnerService, $auth, $state) {
 
         $scope.authenticate = function (provider) {
-            usSpinnerService.spin('loginSpin');
+            //usSpinnerService.spin('loginSpin');
             $auth.authenticate(provider).then(function (res) {
                 //alert('success', 'welcome back ' + res.data.user.email);
-                if (res.data.user.locationid == null) {
-                    alert('success', 'Please select a location ');
-                    $state.go('locationset');
-                }
-                usSpinnerService.stop('loginSpin');
+
+                $state.go('profile');
+
+                //usSpinnerService.stop('loginSpin');
             }).catch(handleError);
         }
 
