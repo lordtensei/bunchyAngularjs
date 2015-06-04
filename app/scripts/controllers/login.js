@@ -5,13 +5,7 @@ angular.module('jwtApp')
 
         $scope.authenticate = function (provider) {
             //usSpinnerService.spin('loginSpin');
-            $auth.authenticate(provider).then(function (res) {
-                //alert('success', 'welcome back ' + res.data.user.email);
-
-                $state.go('profile');
-
-                //usSpinnerService.stop('loginSpin');
-            }).catch(handleError);
+            $auth.authenticate(provider).then(function (res) {}).catch(handleError);
         }
 
         $scope.strava = function () {
