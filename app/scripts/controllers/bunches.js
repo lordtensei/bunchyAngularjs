@@ -130,10 +130,9 @@ angular.module('jwtApp')
             });
         };
 
-        $scope.details = function (ridedetailid, rideid) {
+        $scope.details = function (rideid) {
             console.log(rideid);
             $state.go('ridedetails', {
-                "ridedetailid": ridedetailid,
                 "rideid": rideid
             });
         };

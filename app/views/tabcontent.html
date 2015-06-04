@@ -7,16 +7,16 @@
 
 <div ng-repeat="bunch in bunches | filter:searchText track by bunch.id">
     <div class="col-md-12">
-        <button ng-click="details(bunch.ridedetailid, bunch.id)" tooltip="details" class="btn btn-block btn-success"><span><i class="fa fa-bicycle fa-lg"></i></span>
+        <button ng-click="details(bunch.id)" tooltip="details" class="btn btn-block btn-success"><span><i class="fa fa-bicycle fa-lg"></i></span>
         </button>
         <p></p>
     </div>
     <div>
         <div>
-            <button ng-click="details(bunch.ridedetailid, bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> {{bunch.commentcount}} </i></span>
+            <button ng-click="details(bunch.id)" tooltip="comments" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-comment"> {{bunch.commentcount}} </i></span>
             </button>
             <span> </span>
-            <button ng-click="details(bunch.ridedetailid, bunch.id)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
+            <button ng-click="details(bunch.id)" tooltip="attending" class="pull-right btn btn-xs btn-success"><span><i class="fa fa-users"> {{bunch.riderarray.length}} </i></span>
             </button>
         </div>
         <div class="col-md-6">
